@@ -26,12 +26,15 @@ public class BDCursor {
 	public ArrayList<Imagen> buscar(){
 		if (atributo == "" && busqueda == "") {
 			encontra2 = coleccion;
+			return encontra2;
+		}if(coleccion.size() == 1) {
+			return coleccion;
 		}else {
-			System.out.println("Buscando en  \""+ atributo + "\". Elementos con: " + busqueda);
+			System.out.println("Buscando en  \""+ "id" + "\". Elementos con: " + busqueda);
 			for (int i = 0; i < coleccion.size();i++) {
 				Imagen img = coleccion.get(i);
 				String b = busqueda;
-				if (img.id.equals(b) || img.tamano.equals(b) || img.datos.equals(b)){
+				if (img.getId().equals(b)){
 					encontra2.add(img);
 				}
 			}
@@ -40,6 +43,22 @@ public class BDCursor {
 			}
 		}	
 		return encontra2;
+	}
+	public Imagen buscarB(String busqueda) {
+		for (int i = 0; i < coleccion.size();i++) {
+			Imagen img = coleccion.get(i);
+			if (img.getId().equals(busqueda)){
+				return img;
+			}
+		}busqueda ="\""+ busqueda+"\"";
+		for (int i = 0; i < coleccion.size();i++) {
+			Imagen img = coleccion.get(i);
+			if (img.getId().equals(busqueda)){
+				return img;
+			}
+		}
+		
+		return null;
 	}
 
 	public int tamano() {
@@ -52,13 +71,15 @@ public class BDCursor {
 
 	public void cerrar() {
 		encontra2 = new ArrayList<Imagen>();
+		atributo = "";
+		busqueda = "";
 	}
 	
 	public Imagen encontrarId(String iD) {
 		for (int i = 0; i < encontra2.size();i++) {
 			Imagen img = encontra2.get(i);
 			String b = busqueda;
-			if (img.id.equals(b) || img.tamano.equals(b) || img.datos.equals(b)){
+			if (img.id.equals(b)){
 				return img;
 			}
 	}

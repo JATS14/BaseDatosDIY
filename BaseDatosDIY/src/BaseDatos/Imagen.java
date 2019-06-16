@@ -7,13 +7,17 @@ public class Imagen {
 	String ano;
 	String tamano;
 	String datos;
+	String descripcion;
+	String nombre;
 
-	public Imagen(String id, String autor, String ano,String tamano, String datos) {
+	public Imagen(String id, String nombre, String ano, String autor,String tamano, String descripcion, String datos) {
 		this.id = id;
 		this.tamano = tamano;
 		this.datos = datos;
 		this.autor = autor;
 		this.ano = ano;
+		this.descripcion = descripcion;
+		this.nombre = nombre;
 	}
 	
 	public String getId() {
@@ -32,13 +36,13 @@ public class Imagen {
 		return autor;
 	}
 	public void setAutor(String autor) {
-		this.datos = autor;
+		this.autor = autor;
 	}
 	public String getAno() {
 		return ano;
 	}
 	public void setAno(String ano) {
-		this.datos = ano;
+		this.ano = ano;
 	}
 	public String getDatos() {
 		return datos;
@@ -46,10 +50,22 @@ public class Imagen {
 	public void setDatos(String datos) {
 		this.datos = datos;
 	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String Descripcion) {
+		this.descripcion = Descripcion;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String Nombre) {
+		this.nombre = Nombre;
+	}
 	
 	
 	public String toString() {
-		String texto = "ID: " + this.id + " / Autor: " + this.autor + " / Año: " + this.ano + " / Tamano: " + this.tamano + " / Datos: " + this.datos;
+		String texto = "ID: " + this.id + " / Nombre: " + this.nombre + " / Aï¿½o: " + this.ano +" / Autor: " + this.autor + " / Tamano: " + this.tamano + " / Descripcion: "+ this.descripcion+ " / Datos: " + this.datos;
 		return texto;
 	}
 

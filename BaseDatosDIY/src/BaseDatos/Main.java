@@ -14,10 +14,10 @@ public class Main {
 	BDColeccion coleccion = bd.getColeccion("Imagenes");
 	
 	//Insertamos elementos
-	Imagen img1 = new Imagen("001","Juan", "2011", "10", "0100110110");
-	Imagen img2 = new Imagen("002", "pedro", "20414","10", "1001001101");
-	Imagen img3 = new Imagen("004", "Isak", "201454541","10", "0100111100");
-	Imagen img4 = new Imagen("005","Lamadre", "454", "10", "1010101001");
+	Imagen img1 = new Imagen("001","FotoDeGatitos", "2011","Juan", "10","imagen1", "0100110110");
+	Imagen img2 = new Imagen("002","FotoDeGatitos", "2011" ,"pedro","10","imagen2", "1001001101");
+	Imagen img3 = new Imagen("004", "FotoDeGatitos", "2011","Isak","10","imagen3", "0100111100");
+	Imagen img4 = new Imagen("005","FotoDeGatitos", "2011","Lamadre", "10", "imagen4", "1010101001");
 	coleccion.insert(img1);
 	coleccion.insert(img2);
 	coleccion.insert(img3);
@@ -25,7 +25,7 @@ public class Main {
 	
 	//Cuantos Imagenes hay?
 	int numDocumentos = (int) coleccion.getCount();
-	System.out.println("Número de documentos en la colección galeria: " + numDocumentos + "\n");
+	System.out.println("Nï¿½mero de documentos en la colecciï¿½n galeria: " + numDocumentos + "\n");
 	
 	
 	//Buscar Todos los elementos en la BD
@@ -37,15 +37,12 @@ public class Main {
 	cursor.cerrar();
 	
 	//Buscar Solo dato con id 001
-	cursor = coleccion.find("id","001");
-	for (int i = 0; i < cursor.tamano();i++) {
-		System.out.println(cursor.get(i).toString());
-	}
-	cursor.cerrar();
+	Imagen img = coleccion.find("id","001");
+	System.out.println("Imagen: " + img.toString() );
 	
 	//Actualizar solo un elemento
-	Imagen buscar = coleccion.buscar("id","002");
-	Imagen actualizar = new Imagen("","","","","0001111101");
+	Imagen buscar = coleccion.buscar("id","001");
+	Imagen actualizar = new Imagen("","","","","","","0001111101");
 	coleccion.actualizar(buscar,actualizar);
 	
 	
@@ -60,7 +57,7 @@ public class Main {
 		
 	//Borar un elemento
 	
-	Imagen buscaryborrar = coleccion.buscar("id","002");
+	Imagen buscaryborrar = coleccion.buscar("id","001");
 	coleccion.encontrarYBorrar(buscaryborrar);
 	
 	System.out.println("\n");

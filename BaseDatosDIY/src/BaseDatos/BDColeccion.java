@@ -50,13 +50,15 @@ public class BDColeccion {
 		return cursor;
 	}
 	
-	public BDCursor find(String atributo, String busqueda) {
+	public Imagen find(String atributo, String busqueda) {
 		cursor = new BDCursor(coleccion);
-		cursor.setAtributo(atributo);
-		cursor.setBusqueda(busqueda);
-		cursor.buscar();
-		return cursor;
+		Imagen img = cursor.buscarB(busqueda);
+		if(img == null) {
+			return new Imagen(busqueda,"error","error","error","error","error","error");
+		}
+		return img;
 	}
+	
 
 	public void actualizar(Imagen busqueda, Imagen actualizar) {
 		if (busqueda == null){
@@ -64,10 +66,14 @@ public class BDColeccion {
 			return;
 		}
 		if(actualizar.getId() == "") {actualizar.setId(busqueda.getId());}
-		if(actualizar.getPeso() == "") {actualizar.setPeso(busqueda.getPeso());}
-		if(actualizar.getDatos() == "") {actualizar.setDatos(busqueda.getDatos());}
-		if(actualizar.getAutor() == "") {actualizar.setAutor(busqueda.getAutor());}
+		if(actualizar.getNombre() == "") {actualizar.setNombre(busqueda.getNombre());}
 		if(actualizar.getAno() == "") {actualizar.setAno(busqueda.getAno());}
+		if(actualizar.getAutor() == "") {actualizar.setAutor(busqueda.getAutor());}
+		if(actualizar.getPeso() == "") {actualizar.setPeso(busqueda.getPeso());}
+		if(actualizar.getDescripcion() == "") {actualizar.setDescripcion(busqueda.getDescripcion());}
+		if(actualizar.getDatos() == "") {actualizar.setDatos(busqueda.getDatos());}
+
+		
 		int posicion = posicion(busqueda.getId());
 		coleccion.remove(posicion);
 		coleccion.add(actualizar);
@@ -75,9 +81,8 @@ public class BDColeccion {
 	}
 
 	public Imagen buscar(String atributo, String busqueda) {
-		BDCursor h = find(atributo, busqueda);
-		Imagen im = h.encontrarId(busqueda);
-		return im;
+		Imagen h = find(atributo, busqueda);
+		return h;
 	}
 	public int posicion(String id) {
 		for(int i = 0; i < coleccion.size();i++) {
@@ -101,7 +106,8 @@ public class BDColeccion {
 	private ArrayList<Imagen> deserializador(String json) {
 		ArrayList<Imagen> coleccion2 = new ArrayList<Imagen>();
 		String id = ""; String pe = "";String dato = "";
-		String ano = ""; String autor = "";
+		String ano = ""; String autor = ""; String des = "";
+		String nom = "";
 		String[] accion = json.split(";");
 		int cont = 1;
 		for(int i = 0; i < accion.length; i++) {
@@ -111,13 +117,15 @@ public class BDColeccion {
 				String h = imagen[j];
 				String[] parte = h.split(" ");
 				if(cont == 1){id = parte[1];}
-				if(cont == 2){autor = parte[1];}
-				if(cont == 3){ano = parte[1];}
-				if(cont == 4){pe = parte[1];}
-				if(cont == 5){dato = parte[1];}
+				if(cont == 2){nom = parte[1];}
+				if(cont == 3){autor = parte[1];}
+				if(cont == 4){ano = parte[1];}
+				if(cont == 5){pe = parte[1];}
+				if(cont == 6){des = parte[1];}
+				if(cont == 7){dato = parte[1];}
 				cont++;
 				}
-			Imagen g = new Imagen(id,autor,ano,pe,dato);
+			Imagen g = new Imagen(id,nom,ano,autor,pe,des,dato);
 			coleccion2.add(g);
 			cont = 1;
 		}
@@ -153,9 +161,11 @@ public class BDColeccion {
 	private String serializarImagen(Imagen img) {
 		String string = 
 				"{\"id\": "  + img.getId() + "," +
+				"\"Nombre\": " + img.getNombre() + "," +
+				"\"aï¿½o\": " + img.getAno() + "," +
 				"\"autor\": " + img.getAutor() + "," +
-				"\"año\": " + img.getAno() + "," +
-				"\"tamaño\": " + img.getPeso() + "," +
+				"\"tamaï¿½o\": " + img.getPeso() + "," +
+				"\"Descripcion\": " + img.getDescripcion() + "," +
 				"\"datos\": " + img.getDatos() + " }";
 		return string;
 	}
