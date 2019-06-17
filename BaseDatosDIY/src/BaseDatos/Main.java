@@ -14,10 +14,10 @@ public class Main {
 	BDColeccion coleccion = bd.getColeccion("Imagenes");
 	
 	//Insertamos elementos
-	Imagen img1 = new Imagen("001","FotoDeGatitos", "2011","Juan", "10","imagen1", "0100110110");
-	Imagen img2 = new Imagen("002","FotoDeGatitos", "2011" ,"pedro","10","imagen2", "1001001101");
-	Imagen img3 = new Imagen("004", "FotoDeGatitos", "2011","Isak","10","imagen3", "0100111100");
-	Imagen img4 = new Imagen("005","FotoDeGatitos", "2011","Lamadre", "10", "imagen4", "1010101001");
+	Imagen img1 = new Imagen("001","FotoDeGatitos", "2011","Juan2", "10","imagen1", "0100110110");
+	Imagen img2 = new Imagen("002","FotoDeGatitos", "2011" ,"pedro2","10","imagen2", "1001001101");
+	Imagen img3 = new Imagen("004", "FotoDeGatitos", "2011","Isak2","10","imagen3", "0100111100");
+	Imagen img4 = new Imagen("005","FotoDeGatitos", "2011","Lamadre2", "10", "imagen4", "1010101001");
 	coleccion.insert(img1);
 	coleccion.insert(img2);
 	coleccion.insert(img3);
