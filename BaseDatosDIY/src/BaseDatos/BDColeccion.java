@@ -12,29 +12,46 @@ public class BDColeccion {
 	public BDColeccion(String nombre) {
 		this.nombre = nombre;
 		try {
-			File archivo = new File("BD-DIY.txt");
-			FileReader fr = new FileReader(archivo);
-			BufferedReader br = new BufferedReader(fr);
-			String leido;
-			leido = br.readLine();
-			System.out.println("se leyo: " + leido);
-			br.close();
-			fr.close();
-			
-			if(leido != "") {
-				coleccion = deserializador(leido);
-			}
-			
-	}catch(Exception e) {
-		System.out.println("Error al Leer base de datos...");
-		System.out.println("Se creara una nueva Base de datos");
-		coleccion = new ArrayList<Imagen>();
-	}
-	
-		
+			ArrayList<Imagen> coleccion2 = leerDeHuffman();
+			coleccion = coleccion2;
+		}catch(Exception e) {
+			System.out.println("Error al Leer Huffman...");
+			System.out.println("Se leeran archivos del TXT");
+			ArrayList<Imagen> coleccion3 = leerDeTXT();
+			coleccion = coleccion3;
+		}
 		System.out.println("");
 	}
+	 private ArrayList<Imagen> leerDeHuffman(){
+		 Huffman.leertxt();
+		 String decoded = Huffman.decoded;
+		 ArrayList<Imagen> list = deserializador(decoded);
+		 return list;
+	 }
+	 private ArrayList<Imagen> leerDeTXT(){
+		 try {
+				File archivo = new File("BD-DIY.txt");
+				FileReader fr = new FileReader(archivo);
+				BufferedReader br = new BufferedReader(fr);
+				String leido;
+				leido = br.readLine();
+				System.out.println("se leyo: " + leido);
+				br.close();
+				fr.close();
+				
+				if(leido != "") {
+					return deserializador(leido);
+				}
+				
+		}catch(Exception e) {
+			System.out.println("Error al Leer base de datos...");
+			System.out.println("Se creara una nueva Base de datos");
+		}
+		 return new ArrayList<Imagen>();
 
+	 }
+	
+	
 	public void insert(Imagen dbObjectLibro) {
 		coleccion.add(dbObjectLibro);
 	}
@@ -141,6 +158,7 @@ public class BDColeccion {
 		wr.write(serializador(coleccion));
 		wr.close();
 		bw.close();
+		Huffman.guardarEntxt(serializador(coleccion));
 	}catch(Exception e) {
 		System.out.println("Error al Guardar base de datos");
 		return;
@@ -162,9 +180,9 @@ public class BDColeccion {
 		String string = 
 				"{\"id\": "  + img.getId() + "," +
 				"\"Nombre\": " + img.getNombre() + "," +
-				"\"a�o\": " + img.getAno() + "," +
+				"\"ano\": " + img.getAno() + "," +
 				"\"autor\": " + img.getAutor() + "," +
-				"\"tama�o\": " + img.getPeso() + "," +
+				"\"tamano\": " + img.getPeso() + "," +
 				"\"Descripcion\": " + img.getDescripcion() + "," +
 				"\"datos\": " + img.getDatos() + " }";
 		return string;

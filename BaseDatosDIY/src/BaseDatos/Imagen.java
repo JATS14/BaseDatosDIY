@@ -65,7 +65,7 @@ public class Imagen {
 	
 	
 	public String toString() {
-		String texto = "ID: " + this.id + " / Nombre: " + this.nombre + " / A�o: " + this.ano +" / Autor: " + this.autor + " / Tamano: " + this.tamano + " / Descripcion: "+ this.descripcion+ " / Datos: " + this.datos;
+		String texto = "ID: " + this.id + " / Nombre: " + this.nombre + " / Ano: " + this.ano +" / Autor: " + this.autor + " / Tamano: " + this.tamano + " / Descripcion: "+ this.descripcion+ " / Datos: " + this.datos;
 		return texto;
 	}
 

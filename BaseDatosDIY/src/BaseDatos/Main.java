@@ -25,7 +25,7 @@ public class Main {
 	
 	//Cuantos Imagenes hay?
 	int numDocumentos = (int) coleccion.getCount();
-	System.out.println("N�mero de documentos en la colecci�n galeria: " + numDocumentos + "\n");
+	System.out.println("Numero de documentos en la coleccion galeria: " + numDocumentos + "\n");
 	
 	
 	//Buscar Todos los elementos en la BD
